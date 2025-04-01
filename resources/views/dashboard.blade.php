@@ -4,21 +4,38 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-
+    
     @php
         $type = 'danger'
     @endphp
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <x-alert class='' id='alert' :type='$type' title="Title enviado desde el atributo">
+
+            {{-- <x-alert class='' id='alert' :type='$type' title="Title enviado desde el atributo">
                 
                 <x-slot name='title'>
                     Title enviado desde el slot
                 </x-slot>
 
                 <p>texto de prueba para el parrafo</p>
-            </x-alert>
+            </x-alert> --}}
+
+            {{-- @livewire('create-post', [
+                'title' => 'Titulo',
+                'user' => 1
+            ]) --}}
+
+            {{-- @livewire('contador') --}}
+
+            @livewire('paises')
+
+            <br>
+
+            <p>Contenido fuera del componente</p>
+
         </div>
     </div>
+
+
 </x-app-layout>

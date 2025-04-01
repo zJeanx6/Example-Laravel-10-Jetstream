@@ -16,9 +16,9 @@
     }
 @endphp
 
-@dump($attributes)
+{{-- @dump($attributes) --}}
 {{-- class="p-4 mb-4 text-sm  rounded-lg {{$clases}}" --}}
 <div {{ $attributes->merge(['class' => "p-4 mb-4 text-sm rounded-lg $clases", 'role' => "alert"]) }} >
-    <h1 class="text-blue-800">{{ $title }}</h1>
+    <h1">{{ $title }}</h1>
     <span class="font-medium">{{ $slot }}</span>
 </div>
