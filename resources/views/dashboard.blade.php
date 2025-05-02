@@ -10,7 +10,7 @@
     @endphp
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
 
             {{-- <x-alert class='' id='alert' :type='$type' title="Title enviado desde el atributo">
                 
@@ -28,7 +28,8 @@
 
             {{-- @livewire('contador') --}}
 
-            @livewire('paises')
+            {{-- @livewire('paises') --}}
+            @livewire('formulario')
 
             <br>
 
