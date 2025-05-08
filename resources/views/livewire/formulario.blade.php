@@ -17,7 +17,7 @@
 
             <div class="mb-4">
                 <x-label>Categoria</x-label>
-                <x-select place class="w-full" wire:model="postCreate.category_id">
+                <x-select place class="w-full" wire:model.live="postCreate.category_id">
                     <option value="" disabled>
                         Selecciona una categoria
                     </option>
@@ -143,4 +143,19 @@
         </x-dialog-modal>
     </form>
 
+    @push('js')
+        <script>
+
+            // document.addEventListener('livewire:initialized', function(){
+            //     Livewire.on('post-created', function(comment) {
+            //         console.log(comment[0])
+            //     });
+            // });
+
+            Livewire.on('post-created', function(comment) {
+                console.log(comment[0])
+            });
+
+        </script>
+    @endpush
 </div>

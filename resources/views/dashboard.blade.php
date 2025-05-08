@@ -29,11 +29,16 @@
             {{-- @livewire('contador') --}}
 
             {{-- @livewire('paises') --}}
+
             @livewire('formulario')
 
+            <div class="mt-8">
+                @livewire('comments')
+            </div>
+            
             <br>
 
-            <p>Contenido fuera del componente</p>
+            <p>Footer dashboard</p>
 
         </div>
     </div>

@@ -54,7 +54,8 @@ class Formulario extends Component
     //     'tags' => [],
     // ];
 
-
+    //Ciclo de vida de un componente, Mount es cuando montamos el componente
+    //Cargamos datos iniciales como listas, colecciones, etc.
     public function mount()
     {
         $this->categories = Category::all();
@@ -63,11 +64,37 @@ class Formulario extends Component
         $this->posts = Post::all();
     }
 
+
+    public function updating($property, $value){
+    //Metodo que nos permite interceptar en el ciclo de vida, antes de realizar algun cambio podemos 
+    //realizar acciones como mutar la informacion, o validar algo más como opciones no disponles, para evitar usuarios mal intencionados
+        // dd($property, $value);
+        if ($property == 'postCreate.category_id') {
+            if ($value > 3) {
+                throw new \Exception("No puedes seleccionar esta categoria");
+            }
+        }
+    }
+
+    public function updated($property, $value) {
+        //Este metodo es para realizar algo similar al anterior con la diferencia de que aqui 
+        //interceptamos despues de que livewire realice los cambios.
+    }
+
+    public function hydrate(){
+
+    }
+
+    public function deshydrate(){
+        
+    }
+
     public function save()
     {
         $this->postCreate->validate();
         $this->postCreate->save();
         $this->posts = Post::all();
+        $this->dispatch('post-created', 'Nuevo articulo creado');
 
         // $this->validate([
         //     'title' => 'required',
@@ -130,6 +157,7 @@ class Formulario extends Component
     {
         $this->postEdit->update();
         $this->posts = Post::all();
+        $this->dispatch('post-created', 'Articulo actualizado');
 
         // $this->validate([
         //     'postEdit.title' => 'required',
@@ -142,7 +170,7 @@ class Formulario extends Component
         //     'postEdit.category_id' => 'categoria'
         // ]);
 
-        // $post = Post::find($this->postEditId);
+        // $post = Post::find($this->postEditId); 
 
         // $post->update([
         //     'category_id' => $this->postEdit['category_id'],
@@ -163,6 +191,8 @@ class Formulario extends Component
         $post->delete();
 
         $this->posts = Post::all();
+
+        $this->dispatch('post-created', 'Articulo eliminado');
     }
 
     public function render()
