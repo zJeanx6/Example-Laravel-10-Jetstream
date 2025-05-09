@@ -7,9 +7,11 @@ use App\Livewire\Forms\PostEditForm;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
+#[Lazy]
 class Formulario extends Component
 {
 
@@ -63,6 +65,12 @@ class Formulario extends Component
         
         $this->posts = Post::all();
     }
+    
+    //Si utilizo la carga predeterminada de la configuracion de livewire no es necesario este metodo sino solamente incluir #[Lazy] al inicio de la clase
+    // public function placeholder()
+    // {
+    //     return view('');
+    // }
 
 
     public function updating($property, $value){

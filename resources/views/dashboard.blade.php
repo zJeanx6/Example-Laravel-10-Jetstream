@@ -30,15 +30,17 @@
 
             {{-- @livewire('paises') --}}
 
-            {{-- @livewire('formulario')
+            {{-- @livewire('formulario') --}}
+            {{-- <livewire:formulario lazy /> --}}
+            <livewire:formulario />
 
             <div class="mt-8">
                 @livewire('comments')
-            </div> --}}
+            </div>
             
             <br>
 
-            @livewire('father')
+            {{-- @livewire('father') --}}
 
         </div>
     </div>
