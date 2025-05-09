@@ -30,15 +30,15 @@
 
             {{-- @livewire('paises') --}}
 
-            @livewire('formulario')
+            {{-- @livewire('formulario')
 
             <div class="mt-8">
                 @livewire('comments')
-            </div>
+            </div> --}}
             
             <br>
 
-            <p>Footer dashboard</p>
+            @livewire('father')
 
         </div>
     </div>
