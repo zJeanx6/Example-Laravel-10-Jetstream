@@ -27,6 +27,8 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
     
+    Route::view('/prueba', 'prueba')->name('prueba');
+
     // Route::get('/dashboard', CreatePost::class)
     // ->name('dashboard');
     
