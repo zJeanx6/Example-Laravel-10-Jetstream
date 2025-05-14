@@ -9,16 +9,24 @@ use App\Models\Post;
 use App\Models\Tag;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Rule;
+use Livewire\Attributes\Url;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
-#[Lazy]
+// #[Lazy]
 class Formulario extends Component
 {
+    use WithFileUploads;
+    use WithPagination;
 
     //Colecciones a cargar en el metodo mount() para datos de entrada:
     //en este caso la lista de posts, etiquetas y categorias.
-    public $posts, $categories, $tags;
+    // public $posts;
+    public $categories, $tags;
 
+    #[Url(as: 's')]
+    public $search = '';
     //Instaciamos las clases Create y Update para los formularios, clases que contienen:
     //Porpuedades, metodos y validaciones para estos formularios.
     public PostCreateForm $postCreate;
@@ -62,8 +70,7 @@ class Formulario extends Component
     {
         $this->categories = Category::all();
         $this->tags = Tag::all();
-        
-        $this->posts = Post::all();
+        // $this->posts = Post::all();
     }
     
     //Si utilizo la carga predeterminada de la configuracion de livewire no es necesario este metodo sino solamente incluir #[Lazy] al inicio de la clase
@@ -101,7 +108,8 @@ class Formulario extends Component
     {
         $this->postCreate->validate();
         $this->postCreate->save();
-        $this->posts = Post::all();
+        $this->resetPage(pageName: 'pagePosts');
+        // $this->posts = Post::all();
         $this->dispatch('post-created', 'Nuevo articulo creado');
 
         // $this->validate([
@@ -164,7 +172,7 @@ class Formulario extends Component
     public function update()
     {
         $this->postEdit->update();
-        $this->posts = Post::all();
+        // $this->posts = Post::all();
         $this->dispatch('post-created', 'Articulo actualizado');
 
         // $this->validate([
@@ -198,13 +206,20 @@ class Formulario extends Component
 
         $post->delete();
 
-        $this->posts = Post::all();
-
+        // $this->posts = Post::all();
         $this->dispatch('post-created', 'Articulo eliminado');
     }
 
     public function render()
     {
-        return view('livewire.formulario');
+        $posts = Post::orderBy('id', 'desc')
+        // Para utilizar una barra de busqueda
+        ->when($this->search, function ($query) {
+            $query->where('title', 'like', '%' . $this->search . '%');
+        } )
+        // Pagename para cambiar el nombre de la variable de la paginacion en caso de usar mas de una en un mismo componente.
+        ->paginate(5, pageName: 'pagePosts');
+
+        return view('livewire.formulario', compact('posts'));
     }
 }
