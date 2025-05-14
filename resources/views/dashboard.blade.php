@@ -19,6 +19,7 @@
                 </x-slot>
 
                 <p>texto de prueba para el parrafo</p>
+                
             </x-alert> --}}
 
             {{-- @livewire('create-post', [
@@ -27,19 +28,13 @@
             ]) --}}
 
             {{-- @livewire('contador') --}}
-
             {{-- @livewire('paises') --}}
-
             {{-- @livewire('formulario') --}}
             {{-- <livewire:formulario lazy /> --}}
-            <livewire:formulario />
-
-            <div class="mt-8">
-                @livewire('comments')
-            </div>
-            
-            <br>
-
+            {{-- <livewire:formulario /> --}}
+            {{-- <div class="mt-8"> @livewire('comments') </div> --}}
+            {{-- <div class="mt-8"> @livewire('computedComponent') </div> --}}
+            {{-- <br> --}}
             {{-- @livewire('father') --}}
 
         </div>
